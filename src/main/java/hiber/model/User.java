@@ -19,14 +19,6 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   @OneToOne(
-        mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
-        fetch = FetchType.LAZY
-   )
-   @JoinColumn(name = "c_id", referencedColumnName = "c_id")
-   public Car car;
 
    public User() {}
 
@@ -68,12 +60,4 @@ public class User {
       this.email = email;
    }
 
-   public void setCar(Car car) {
-      car.setUser( this );
-      this.car = car;
-   }
-
-   public void getCar(Car car) {
-      this.car = car;
-   }
 }

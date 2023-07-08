@@ -11,4 +11,6 @@ public interface UserDao {
 
    void dropUsersTable();
 
+   void deleteUserById(long id);
+
 }

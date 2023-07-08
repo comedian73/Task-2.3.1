@@ -7,6 +7,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -15,30 +17,32 @@ import java.util.List;
 public class UserDaoImp implements UserDao {
 
    @Autowired
-   private SessionFactory sessionFactory;
+   @PersistenceContext
+   protected EntityManager em;
 
    @Override
    public void add(User user) {
-      sessionFactory.getCurrentSession().save(user);
+      em.persist(user);
    }
 
    @Override
    @SuppressWarnings("unchecked")
    public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
+      Query query = em.createQuery("from User");
       return query.getResultList();
    }
 
    @Override
    public void dropUsersTable() {
-      Session session = sessionFactory.openSession();
-      Transaction transaction = session.beginTransaction();
 
-      Query query = session.createSQLQuery("DROP TABLE IF EXISTS users CASCADE").addEntity(User.class);
+      Query query = em.createQuery("DELETE TABLE IF EXISTS users CASCADE");
       query.executeUpdate();
 
-      transaction.commit();
-      session.close();
+   }
+
+   @Override
+   public void deleteUserById(long id) {
+      em.remove(id);
    }
 
 }

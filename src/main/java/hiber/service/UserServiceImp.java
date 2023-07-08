@@ -30,4 +30,8 @@ public class UserServiceImp implements UserService {
    @Override
    public void dropUsersTable(){userDao.dropUsersTable();}
 
+   @Transactional
+   @Override
+   public  void deleteUserById(long id) {userDao.deleteUserById(id);}
+
 }
