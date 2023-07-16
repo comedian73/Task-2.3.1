@@ -34,8 +34,8 @@ public class UserController {
         return this.user(model);
     }
 
-    @DeleteMapping("/user")
-    public void deleteUser(@RequestParam(name = "id") long id, Model model) {
+    @DeleteMapping("/delete")
+    public void deleteUser(@RequestParam(name = "del") long id) {
         userService.deleteUserById(id);
     }
 

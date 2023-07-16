@@ -31,8 +31,9 @@
         <td align="center" th:text="${lst.lastName}">last_name</td>
         <td align="center" th:text="${lst.email}">email</td>
         <td align="center">
-            <form action="/delete" method="post">
-            <input type="submit" value="Delete" th:name="${lst.id}">
+            <form method="post">
+            <input type="text" name="del" th:value="${lst.id}">
+            <input type="submit" value="Delete">
             </form>
         </td>
 
@@ -41,7 +42,7 @@
 </table>
 <p>
 <form method="post">
-    If you want to add or change a user, enter the data and click the button:<br>
+    If you want to add a user, enter the data and click the button:<br>
     <p>Name: <input type="text" name="name"><br>
     <p>Last name: <input type="text" name="last_name"><br>
     <p>Email: <input type="text" name="email"><br>
