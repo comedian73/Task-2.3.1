@@ -21,7 +21,6 @@ public class UserController {
 
         List<User> list = userService.listUsers();
         model.addAttribute("list", list);
-
         return "user";
     }
 
@@ -34,9 +33,33 @@ public class UserController {
         return this.user(model);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteUser(@RequestParam(name = "del") long id) {
+    @PostMapping (value = "/delete")
+    public String deleteUser(@RequestParam(name = "del") long id) {
+
         userService.deleteUserById(id);
+        return "delete";
+    }
+    @GetMapping(value = "/edit")
+    public String edit (@RequestParam(name = "edit") long id, Model model) {
+
+        User user = userService.getUser(id);
+        model.addAttribute("user", user);
+        return "edit";
+    }
+
+    @PostMapping(value = "/edit")
+    public String saveEdit (@RequestParam(name = "id") long id,
+                            @RequestParam(name = "name") String name,
+                            @RequestParam(name = "last_name") String lastName,
+                            @RequestParam(name = "email") String email, Model model) {
+
+        User user = userService.getUser(id);
+        user.setFirstName(name);
+        user.setLastName(lastName);
+        user.setEmail(email);
+
+        userService.add(user);
+        return this.user(model);
     }
 
 }

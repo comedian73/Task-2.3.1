@@ -13,4 +13,7 @@ public interface UserDao {
 
    void deleteUserById(long id);
 
+   User getUser(long id);
+//   void editUser(long id, String name, String lastName, String email);
+
 }

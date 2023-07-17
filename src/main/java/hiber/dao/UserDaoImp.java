@@ -22,7 +22,9 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public void add(User user) {
-      em.persist(user);
+      if (user.getId() == null){
+         em.persist(user);
+      } else {em.merge(user);}
    }
 
    @Override
@@ -42,7 +44,23 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public void deleteUserById(long id) {
-      em.remove(id);
+      User user = em.find(User.class, id);
+      em.remove(user);
    }
 
+   @Override
+   public User getUser (long id) {
+      User user = em.find(User.class, id);
+      return user;
+   }
+
+//   @Override
+//   public void editUser(long id, String name, String lastName, String email) {
+//      em.createQuery("UPDATE users SET name = :name, last_name = :lastName, email = :email WHERE id = :id")
+//              .setParameter("id", id)
+//              .setParameter("name", name)
+//              .setParameter("lastName", lastName)
+//              .setParameter("email", email)
+//              .executeUpdate();
+//   }
 }
