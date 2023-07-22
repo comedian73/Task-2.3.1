@@ -1,4 +1,4 @@
-package hiber.dao;
+package hiber.config;
 
 import hiber.model.User;
 

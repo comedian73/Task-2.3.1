@@ -1,6 +1,7 @@
-package hiber.service;
+package hiber.config;
 
-import hiber.dao.UserDao;
+import hiber.config.UserDao;
+import hiber.config.UserService;
 import hiber.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,5 @@ public class UserServiceImp implements UserService {
    @Transactional
    @Override
    public User getUser(long id) {return userDao.getUser(id);}
-
-//   @Transactional
-//   @Override
-//   public void editUser(long id, String name, String lastName, String email) {
-//      userDao.editUser(id,name,lastName,email);
-//   }
 
 }

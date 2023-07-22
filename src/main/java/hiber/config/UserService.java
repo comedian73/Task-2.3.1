@@ -1,4 +1,4 @@
-package hiber.service;
+package hiber.config;
 
 import hiber.model.User;
 
